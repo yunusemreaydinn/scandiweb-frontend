@@ -1,0 +1,22 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px;
+    height: 10vh;
+    border-bottom: 1px solid #000000;
+}
+
+button {
+    margin: 0 25px;
+    padding: 5px 10px;
+    background: #ffffff;
+    filter: drop-shadow(2px 2px 2px #000000);
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background: #000;
+    color: #fff;
+}
