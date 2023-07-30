@@ -3,9 +3,9 @@ import './Footer.css'
 
 const Footer = () => {
   return (
-    <footer>
+    <div className='footer'>
         Scandiweb Test assignment
-    </footer>
+    </div>
   )
 }
 

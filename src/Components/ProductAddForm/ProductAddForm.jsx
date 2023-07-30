@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import './ProductAddForm.css'
+import React, { useState } from 'react';
+import './ProductAddForm.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Header from '../Header/Header';
 
 const ProductAddForm = () => {
 
     const [inputs, setInputs] = useState([]);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const name = e.target.name;
@@ -12,10 +15,14 @@ const ProductAddForm = () => {
         setInputs(values => ({ ...values, [name]: value }));
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost/scandiweb-backend/App/Api/add_product.php", inputs);
-        console.log(inputs);
+        try {
+            await axios.post("http://localhost/scandiweb-backend/App/Api/add_product.php", inputs)
+                .then(navigate("/")); //BURAYI DEĞİŞTİR
+        } catch (error) {
+            console.error("Error: ", error);
+        }
     }
 
     const additionalFields = () => {
@@ -55,7 +62,7 @@ const ProductAddForm = () => {
                     <tr>
                         <td><label htmlFor="weight">Height (CM) </label></td>
                         <td><input
-                            type="text"
+                            type="number"
                             id="height"
                             name="height"
                             onChange={handleChange}
@@ -64,7 +71,7 @@ const ProductAddForm = () => {
                     <tr>
                         <td><label htmlFor="weight">Width (CM) </label></td>
                         <td><input
-                            type="text"
+                            type="number"
                             id="width"
                             name="width"
                             onChange={handleChange}
@@ -73,7 +80,7 @@ const ProductAddForm = () => {
                     <tr>
                         <td><label htmlFor="weight">Length (CM) </label></td>
                         <td><input
-                            type="text"
+                            type="number"
                             id="length"
                             name="length"
                             onChange={handleChange}
@@ -87,65 +94,60 @@ const ProductAddForm = () => {
 
     return (
         <>
-            <form id="product_form" method='post' onSubmit={handleSubmit}>
-                <header>
-                    <h1> Product Add </h1>
-                    <div>
-                        <button type='submit'>Save</button>
-                        <a href='/'><span className='cancel'>Cancel</span></a>
+            <div className='form'>
+                <form id="product_form" method='post' onSubmit={handleSubmit}>
+                    <Header title={"Product Add"} />
+                    <div className='wrapper'>
+                        <table cellSpacing={10} className='product-add-form'>
+                            <tbody>
+                                <tr>
+                                    <td><label htmlFor="sku">SKU </label></td>
+                                    <td><input
+                                        type="text"
+                                        name="sku"
+                                        id="sku"
+                                        onChange={handleChange}
+                                        required /></td>
+                                </tr>
+                                <tr>
+                                    <td><label htmlFor="name">Name </label></td>
+                                    <td><input
+                                        type="text"
+                                        name="name"
+                                        id="name"
+                                        onChange={handleChange}
+                                        required /></td>
+                                </tr>
+                                <tr>
+                                    <td><label htmlFor="price">Price ($) </label></td>
+                                    <td><input
+                                        type="number"
+                                        name="price"
+                                        id="price"
+                                        onChange={handleChange}
+                                        required /></td>
+                                </tr>
+                                <tr>
+                                    <td><label htmlFor="productType">Type Switcher </label></td>
+                                    <td><select
+                                        id="productType"
+                                        name="productType"
+                                        value={inputs.productType ? inputs.productType : "Type Switcher"}
+                                        onChange={handleChange}>
+                                        <option disabled>Type Switcher</option>
+                                        <option value="book">Book</option>
+                                        <option value="dvd">DVD</option>
+                                        <option value="furniture">Furniture</option>
+                                    </select></td>
+                                </tr>
+
+                                {additionalFields()}
+
+                            </tbody>
+                        </table>
                     </div>
-                </header>
-
-                <div className='wrapper'>
-                    <table cellSpacing={10} className='product-add-form'>
-                        <tbody>
-                            <tr>
-                                <td><label htmlFor="sku">SKU </label></td>
-                                <td><input
-                                    type="text"
-                                    name="sku"
-                                    id="sku"
-                                    onChange={handleChange}
-                                    required /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="name">Name </label></td>
-                                <td><input
-                                    type="text"
-                                    name="name"
-                                    id="name"
-                                    onChange={handleChange}
-                                    required /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="price">Price ($) </label></td>
-                                <td><input
-                                    type="number"
-                                    name="price"
-                                    id="price"
-                                    onChange={handleChange}
-                                    required /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="productType">Type Switcher </label></td>
-                                <td><select
-                                    id="productType"
-                                    name="productType"
-                                    value = { inputs.productType ? inputs.productType : "Type Switcher"}
-                                    onChange={handleChange}>
-                                    <option disabled>Type Switcher</option>
-                                    <option value="book">Book</option>
-                                    <option value="dvd">DVD</option>
-                                    <option value="furniture">Furniture</option>
-                                </select></td>
-                            </tr>
-
-                            {additionalFields()}
-
-                        </tbody>
-                    </table>
-                </div>
-            </form>
+                </form>
+            </div>
         </>
     )
 }

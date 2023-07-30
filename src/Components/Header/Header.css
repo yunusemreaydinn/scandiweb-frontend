@@ -2,9 +2,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 20px;
     height: 10vh;
     border-bottom: 1px solid #000000;
+    margin-bottom: 20px;
 }
 
 button {
@@ -19,4 +19,8 @@ button {
 button:hover {
     background: #000;
     color: #fff;
+}
+
+.title {
+    padding-left: 20px;
 }

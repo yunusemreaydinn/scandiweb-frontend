@@ -13,13 +13,13 @@
     color: #fff;
 }
 
-a { 
-    color: #000; 
-    text-decoration: none; 
+a {
+    color: #000;
+    text-decoration: none;
     font-size: 0.8rem;
 }
 
-th{
+th {
     text-align: left;
 }
 
@@ -29,4 +29,37 @@ form {
 
 .product-add-form {
     min-width: 500px;
+}
+
+.form {
+    height: 100vh;
+}
+
+input[type="checkbox"] {
+    transform: scale(1);
+    transition: all 0.3s ease;
+}
+
+input[type="checkbox"]:checked {
+    transform: scale(1.1);
+}
+
+input {
+    background-color: white;
+    transition: all 0.3s ease;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+select {
+    background-color: white;
+    transition: all 0.3s ease;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

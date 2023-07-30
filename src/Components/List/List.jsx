@@ -4,26 +4,28 @@ import './List.css'
 import axios from 'axios'
 
 
-const List = () => {
+const List = ({ handleCheckboxChange }) => {
 
   const [products, setProducts] = useState([])
 
-  const getusers = () => {
-    axios.get("http://localhost/scandiweb-backend/App/Api/get_products.php")
-      .then(function (res) {
-        setProducts(res.data);
-      })
+  const getUsers = async (e) => {
+    try {
+      await axios.get("http://localhost/scandiweb-backend/App/Api/get_products.php")
+        .then(res => setProducts(res.data))
+    } catch (error) {
+      console.log('Error:', error);
+    }
   }
 
   useEffect(() => {
-    getusers();
+    getUsers();
   }, [])
 
   return (
     <div className='list'>
       {
         products.map((product) => (
-          <Card key={product.sku} data={product} />
+          <Card key={product.sku} data={product} handleCheckboxChange={handleCheckboxChange} />
         ))
       }
     </div>

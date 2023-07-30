@@ -1,14 +1,18 @@
 import React from 'react'
 import './Header.css'
+import AddButton from '../Buttons/AddButton'
+import DeleteButton from '../Buttons/DeleteButton'
+import SaveButton from '../Buttons/SaveButton'
+import CancelButton from '../Buttons/CancelButton'
 
-const Header = () => {
+const Header = ({ massDelete, title }) => {
 
   return (
     <header>
-      <h1> Product List </h1>
+      <h1 className='title'> {title} </h1>
       <div>
-        <a href='/add-product'><button>ADD</button></a>
-        <button id='delete-product-btn'>MASS DELETE</button>
+        { (title === "Product List") && (<div><AddButton /> <DeleteButton massDelete={massDelete} /> </div>) } 
+        { (title === "Product Add") && (<div> <SaveButton/> <CancelButton/> </div>) }
       </div>
     </header>
   )

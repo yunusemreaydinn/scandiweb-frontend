@@ -1,12 +1,16 @@
 .card {
-    min-width: 22%;
-    height: 180px;
-    border: 2px solid black;
+    min-width: 20%;
+    height: 150px;
+    border: 2px solid rgba(0, 0, 0, 0.5);
     border-radius: 3px;
-    margin: 15px 15px;
-    font-weight: bold;
     display: flex;
     position: relative;
+    margin: 20px
+}
+
+.card:hover {
+    transition: all 0.3s;
+    box-shadow: 0 8px 20px 1px rgba(0, 0, 0, 0.2);
 }
 
 .card-content {
@@ -22,7 +26,7 @@
 }
 
 .delete-checkbox {
-    margin: 20px;
-    height: 12px;
-    width: 12px;
+    margin: 10px;
+    height: 14px;
+    width: 14px;
 }

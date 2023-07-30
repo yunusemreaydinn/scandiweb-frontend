@@ -3,8 +3,9 @@
 body {
     margin: 0 auto;
     padding: 0;
-    width: 80%;
     min-height: 100vh;
 }
 
 * { font-family: 'Montserrat', sans-serif; }
+
+button { cursor: pointer; }
