@@ -8,9 +8,9 @@ const List = ({ handleCheckboxChange }) => {
 
   const [products, setProducts] = useState([])
 
-  const getUsers = async (e) => {
+  const getProducts = async (e) => {
     try {
-      await axios.get("http://localhost/scandiweb-backend/App/Api/get_products.php")
+      await axios.get("https://juniortest-yunusemreaydin.000webhostapp.com/App/Api/get_products.php")
         .then(res => setProducts(res.data))
     } catch (error) {
       console.log('Error:', error);
@@ -18,7 +18,7 @@ const List = ({ handleCheckboxChange }) => {
   }
 
   useEffect(() => {
-    getUsers();
+    getProducts();
   }, [])
 
   return (

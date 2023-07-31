@@ -1,6 +1,12 @@
+import { useNavigate } from "react-router-dom"
+
 const AddButton = () => {
+  const navigate = useNavigate();
+
+  const redirect = () => { navigate("/add-product") }
+
   return (
-    <a href='/add-product'><button type="submit">ADD</button></a>
+    <button type="submit" onClick={redirect}>ADD</button>
   )
 }
 

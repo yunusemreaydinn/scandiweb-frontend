@@ -19,8 +19,8 @@ const Home = () => {
     const massDelete = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost/scandiweb-backend/App/Api/delete_products.php", {skus: selectedCards})
-        .then(window.location.reload())
+            await axios.post("https://juniortest-yunusemreaydin.000webhostapp.com/App/Api/delete_products.php", {skus: selectedCards})
+            .then(window.location.reload())
         } catch (error) {
             console.log('Error:', error);
         }

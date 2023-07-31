@@ -15,15 +15,37 @@ const ProductAddForm = () => {
         setInputs(values => ({ ...values, [name]: value }));
     }
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //         await axios.post("https://juniortest-yunusemreaydin.000webhostapp.com/App/Api/add_product.php", inputs,
+    //             { headers: { 'Content-Type': 'application/json' } })
+    //             .then(navigate("/")); //BURAYI DEĞİŞTİR
+    //     } catch (error) {
+    //         console.error("Error: ", error);
+    //     }
+    // }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost/scandiweb-backend/App/Api/add_product.php", inputs)
-                .then(navigate("/")); //BURAYI DEĞİŞTİR
+          const response = await fetch("https://juniortest-yunusemreaydin.000webhostapp.com/App/Api/add_product.php", {
+            method: 'POST', 
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(inputs) 
+          });
+      
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          } else {
+            navigate("/");
+          }
         } catch (error) {
-            console.error("Error: ", error);
+          console.error("Error: ", error);
         }
-    }
+      }
 
     const additionalFields = () => {
         if (inputs.productType === 'book') {

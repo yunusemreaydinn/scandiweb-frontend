@@ -1,7 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const CancelButton = () => {
-  return (<a href='/'><span className='cancel'>Cancel</span></a>)
+  const navigate = useNavigate();
+
+  const redirect = () => { navigate("/") }
+
+  return (<button onClick={redirect}>Cancel</button>)
 }
 
 export default CancelButton
