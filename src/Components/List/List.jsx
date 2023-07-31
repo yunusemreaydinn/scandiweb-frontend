@@ -10,7 +10,7 @@ const List = ({ handleCheckboxChange }) => {
 
   const getProducts = async (e) => {
     try {
-      await axios.get("https://juniortest-yunusemreaydin.000webhostapp.com/App/Api/get_products.php")
+      await axios.get("/scandiweb-backend/App/Api/get_products.php")
         .then(res => setProducts(res.data))
     } catch (error) {
       console.log('Error:', error);
@@ -21,13 +21,15 @@ const List = ({ handleCheckboxChange }) => {
     getProducts();
   }, [])
 
+  console.log(products)
+
   return (
     <div className='list'>
-      {
+      {/* {
         products.map((product) => (
           <Card key={product.sku} data={product} handleCheckboxChange={handleCheckboxChange} />
         ))
-      }
+      } */}
     </div>
   )
 }

@@ -29,7 +29,7 @@ const ProductAddForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await fetch("https://juniortest-yunusemreaydin.000webhostapp.com/App/Api/add_product.php", {
+          const response = await fetch("../../scandiweb-backend/App/Api/add_product.php", {
             method: 'POST', 
             headers: {
               'Content-Type': 'application/json'
