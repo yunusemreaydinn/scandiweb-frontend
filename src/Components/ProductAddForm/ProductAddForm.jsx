@@ -17,6 +17,7 @@ const ProductAddForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+<<<<<<< HEAD
         if (inputs.productType === '') {
             toast.warn('Please select a product type.', {
                 position: "bottom-right",
@@ -45,6 +46,24 @@ const ProductAddForm = () => {
             } catch (error) {
                 console.error("Error: ", error);
             }
+=======
+        try {
+          const response = await fetch("../../scandiweb-backend/App/Api/add_product.php", {
+            method: 'POST', 
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(inputs) 
+          });
+      
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          } else {
+            navigate("/");
+          }
+        } catch (error) {
+          console.error("Error: ", error);
+>>>>>>> 3e36e85fd82782fbb94c5c92b86beb81bc3f1dbb
         }
     }
 
