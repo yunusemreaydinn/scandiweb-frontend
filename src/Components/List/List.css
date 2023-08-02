@@ -1,8 +1,3 @@
-.main {
-
-
-}
-
 .list {
     margin: auto;
     max-width: 90%;
@@ -11,3 +6,6 @@
     justify-content: center;
 }
 
+.empty-msg {
+    font-weight: bold;
+}

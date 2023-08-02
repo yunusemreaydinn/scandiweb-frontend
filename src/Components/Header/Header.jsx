@@ -1,9 +1,6 @@
 import React from 'react'
 import './Header.css'
-import AddButton from '../Buttons/AddButton'
-import DeleteButton from '../Buttons/DeleteButton'
-import SaveButton from '../Buttons/SaveButton'
-import CancelButton from '../Buttons/CancelButton'
+import { AddButton, DeleteButton, SaveButton, CancelButton  } from '../Buttons/index'
 
 const Header = ({ massDelete, title }) => {
 

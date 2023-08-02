@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './ProductAddForm.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
+import { toast } from 'react-toastify';
 
 const ProductAddForm = () => {
 
-    const [inputs, setInputs] = useState([]);
+    const [inputs, setInputs] = useState({ productType: '' });
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -15,37 +15,38 @@ const ProductAddForm = () => {
         setInputs(values => ({ ...values, [name]: value }));
     }
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         await axios.post("https://juniortest-yunusemreaydin.000webhostapp.com/App/Api/add_product.php", inputs,
-    //             { headers: { 'Content-Type': 'application/json' } })
-    //             .then(navigate("/")); //BURAYI DEĞİŞTİR
-    //     } catch (error) {
-    //         console.error("Error: ", error);
-    //     }
-    // }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-          const response = await fetch("https://juniortest-yunusemreaydin.000webhostapp.com/App/Api/add_product.php", {
-            method: 'POST', 
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(inputs) 
-          });
-      
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          } else {
-            navigate("/");
-          }
-        } catch (error) {
-          console.error("Error: ", error);
+        if (inputs.productType === '') {
+            toast.warn('Please select a product type.', {
+                position: "bottom-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        } else {
+            try {
+                const response = await fetch("http://localhost/scandiweb-backend/App/Api/add_product.php", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(inputs)
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                } else {
+                    navigate("/");
+                }
+            } catch (error) {
+                console.error("Error: ", error);
+            }
         }
-      }
+    }
 
     const additionalFields = () => {
         if (inputs.productType === 'book') {
@@ -126,6 +127,7 @@ const ProductAddForm = () => {
                                     <td><label htmlFor="sku">SKU </label></td>
                                     <td><input
                                         type="text"
+                                        maxLength="24"
                                         name="sku"
                                         id="sku"
                                         onChange={handleChange}
@@ -135,6 +137,7 @@ const ProductAddForm = () => {
                                     <td><label htmlFor="name">Name </label></td>
                                     <td><input
                                         type="text"
+                                        maxLength="24"
                                         name="name"
                                         id="name"
                                         onChange={handleChange}
@@ -144,6 +147,7 @@ const ProductAddForm = () => {
                                     <td><label htmlFor="price">Price ($) </label></td>
                                     <td><input
                                         type="number"
+                                        maxLength="24"
                                         name="price"
                                         id="price"
                                         onChange={handleChange}

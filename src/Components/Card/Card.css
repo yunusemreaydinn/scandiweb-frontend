@@ -5,7 +5,8 @@
     border-radius: 3px;
     display: flex;
     position: relative;
-    margin: 20px
+    margin: 20px;
+    font-weight: 600;
 }
 
 .card:hover {
